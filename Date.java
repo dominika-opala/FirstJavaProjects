@@ -102,10 +102,11 @@ public class Date {
 	}
 	
 	public int[] calculateDateDifference(Date date1) { // Java doesn’t support multi-value returns, and that's why we need to create an array which will contain the differences. 
-		
+
+		//here you could use isBefore method
 		if (this.day >= date1.day && this.month >= date1.month && this.year >= date1.year) {
 			
-			int[] difference = new int[2];
+			int[] difference = new int[2]; // here you need 3 elements in an array, not 2
 			
 			difference[0] = this.day - date1.day;
 			difference[1] = this.month - date1.month;
@@ -114,23 +115,24 @@ public class Date {
 			return difference;  
 			
 		} else {
+			//you SHOULD NOT return null, it is better to return empty array
 			return null;
 		}
 	}
 	
 	public String nameDay() {
 		
-			if  (4902 <= year && year >= 1582) {
+			if  (year >= 1582 && year <= 4902) {
 				
 				String[] weekDays = {"Monday", "Tuesday", "Wednesday" , "Thursday", "Friday" , "Saturday", "Sunday"};
 				
-				int startyear =((int)year/100); 
+				int startyear = year/100; // here you don't need to cast to int
 						
-				int endyear = ((int)year%100); 
+				int endyear = year%100; // here you don't need to cast to int
 				
-				int result = ((int)((2.6*(double)month - 0.2)) + day + endyear + ((int)endyear/4) + ((int)startyear) - 2*(startyear));
+				int result = ((int)((2.6*(double)month - 0.2)) + day + endyear + (endyear/4) + (startyear) - 2*(startyear));
 				
-				return weekDays[result]; // That's a String, right? 
+				return weekDays[result]; // That's a String, right? YES
 			
 		} else {
 			return "The year is out of scope";
